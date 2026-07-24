@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import re
-from typing import List, Optional, Union
+from typing import List, Optional, Union, Literal
 
 from ._espn import AsyncESPN, ESPN
 from ._session import AsyncSession, Session
@@ -13,7 +13,9 @@ from ._types import (
     BallItem,
     CareerStats,
     CommentaryData,
+    CricketFixturesData,
     FallOfWicket,
+    FixturesFilter,
     Format,
     GroundAverages,
     InningsList,
@@ -115,6 +117,10 @@ class CricinfoClient:
     # ------------------------------------------------------------------
     # Series
     # ------------------------------------------------------------------
+
+    def cricket_fixtures(self, fixturefilter: FixturesFilter) -> CricketFixturesData:
+        """Current / Future / Recent cricket fixtures"""
+        return self._ssr.cricket_fixtures(fixturefilter)
 
     def series(self, slug: str) -> SeriesPageData:
         """Series metadata and content feed."""
@@ -305,6 +311,9 @@ class AsyncCricinfoClient:
     # ------------------------------------------------------------------
     # Series
     # ------------------------------------------------------------------
+
+    async def cricket_fixtures(self, fixturefilter: FixturesFilter) -> CricketFixturesData:
+        return await self._ssr.cricket_fixtures(fixturefilter)
 
     async def series(self, slug: str) -> SeriesPageData:
         return await self._ssr.series(slug)
