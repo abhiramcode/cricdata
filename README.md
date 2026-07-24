@@ -152,40 +152,41 @@ All types are importable: `from cricdata import BallItem, MatchInfo, CareerStats
 
 ### Matches
 
-| Method | Parameters | Returns |
-|---|---|---|
-| `live_matches()` | — | `list[dict]` — current/recent matches |
-| `match_scorecard(series_slug, match_slug)` | series & match slugs | `ScorecardData` — full scorecard (innings, batsmen, bowlers, FOW) |
-| `match_commentary(series_slug, match_slug)` | series & match slugs | `CommentaryData` — recent ball-by-ball commentary |
-| `match_ball_by_ball(series_slug, match_slug)` | series & match slugs | `list[list[BallItem]]` — every delivery grouped by innings |
-| `match_overs(series_slug, match_slug)` | series & match slugs | `list[list[OverSummary]]` — over-by-over progression per innings |
-| `match_partnerships(series_slug, match_slug)` | series & match slugs | `list[list[Partnership]]` — partnership details per innings |
-| `match_fall_of_wickets(series_slug, match_slug)` | series & match slugs | `list[list[FallOfWicket]]` — FOW per innings |
-| `match_info(series_slug, match_slug)` | series & match slugs | `MatchInfo` — toss, venue, captains, time, weather, awards, phase stats |
-| `match_weather(series_slug, match_slug)` | series & match slugs | `WeatherResult \| None` — weather (live via ESPNCricinfo, historical via Open-Meteo) |
+| Method                                           | Parameters           | Returns                                                                              |
+| ------------------------------------------------ | -------------------- | ------------------------------------------------------------------------------------ |
+| `live_matches()`                                 | —                    | `list[dict]` — current/recent matches                                                |
+| `match_scorecard(series_slug, match_slug)`       | series & match slugs | `ScorecardData` — full scorecard (innings, batsmen, bowlers, FOW)                    |
+| `match_commentary(series_slug, match_slug)`      | series & match slugs | `CommentaryData` — recent ball-by-ball commentary                                    |
+| `match_ball_by_ball(series_slug, match_slug)`    | series & match slugs | `list[list[BallItem]]` — every delivery grouped by innings                           |
+| `match_overs(series_slug, match_slug)`           | series & match slugs | `list[list[OverSummary]]` — over-by-over progression per innings                     |
+| `match_partnerships(series_slug, match_slug)`    | series & match slugs | `list[list[Partnership]]` — partnership details per innings                          |
+| `match_fall_of_wickets(series_slug, match_slug)` | series & match slugs | `list[list[FallOfWicket]]` — FOW per innings                                         |
+| `match_info(series_slug, match_slug)`            | series & match slugs | `MatchInfo` — toss, venue, captains, time, weather, awards, phase stats              |
+| `match_weather(series_slug, match_slug)`         | series & match slugs | `WeatherResult \| None` — weather (live via ESPNCricinfo, historical via Open-Meteo) |
 
 ### Series
 
-| Method | Parameters | Returns |
-|---|---|---|
-| `series(slug)` | series slug | `SeriesPageData` — series metadata |
-| `series_matches(slug)` | series slug | `SeriesPageData` — completed match results |
-| `series_fixtures(slug)` | series slug | `SeriesPageData` — upcoming schedule |
-| `series_standings(slug)` | series slug | `StandingsData` — points table |
-| `series_stats(slug)` | series slug | `SeriesPageData` — top performers |
-| `series_squads(slug)` | series slug | `SeriesPageData` — squad lists with player bios |
+| Method                     | Parameters                          | Returns                                                  |
+| -------------------------- | ----------------------------------- | -------------------------------------------------------- |
+| `cricket_fixtures(filter)` | `"current"`, `"future"`, `"recent"` | `CricketFixturesData` — current / future / recent series |
+| `series(slug)`             | series slug                         | `SeriesPageData` — series metadata                       |
+| `series_matches(slug)`     | series slug                         | `SeriesPageData` — completed match results               |
+| `series_fixtures(slug)`    | series slug                         | `SeriesPageData` — upcoming schedule                     |
+| `series_standings(slug)`   | series slug                         | `StandingsData` — points table                           |
+| `series_stats(slug)`       | series slug                         | `SeriesPageData` — top performers                        |
+| `series_squads(slug)`      | series slug                         | `SeriesPageData` — squad lists with player bios          |
 
 ### Players
 
-| Method | Parameters | Returns |
-|---|---|---|
-| `search_players(query, limit=10)` | name string | `list[PlayerSearchResult]` — matching players with IDs |
-| `player_bio(player_id)` | numeric ID | `PlayerBio` — name, DOB, bat/bowl style, team, headshot |
+| Method                                                    | Parameters                       | Returns                                                     |
+| --------------------------------------------------------- | -------------------------------- | ----------------------------------------------------------- |
+| `search_players(query, limit=10)`                         | name string                      | `list[PlayerSearchResult]` — matching players with IDs      |
+| `player_bio(player_id)`                                   | numeric ID                       | `PlayerBio` — name, DOB, bat/bowl style, team, headshot     |
 | `player_career_stats(player_id, fmt, stat_type, filters)` | numeric ID, `Format`, `StatType` | `CareerStats` — career averages + per-opposition breakdowns |
-| `player_innings(player_id, fmt, stat_type, filters)` | numeric ID, `Format`, `StatType` | `InningsList` — innings-by-innings list |
-| `player_match_list(player_id, fmt, stat_type, filters)` | numeric ID, `Format`, `StatType` | `MatchList` — match-by-match scores |
-| `player_series_list(player_id, fmt, stat_type, filters)` | numeric ID, `Format`, `StatType` | `SeriesList` — per-series averages |
-| `player_ground_stats(player_id, fmt, stat_type, filters)` | numeric ID, `Format`, `StatType` | `GroundAverages` — per-venue averages |
+| `player_innings(player_id, fmt, stat_type, filters)`      | numeric ID, `Format`, `StatType` | `InningsList` — innings-by-innings list                     |
+| `player_match_list(player_id, fmt, stat_type, filters)`   | numeric ID, `Format`, `StatType` | `MatchList` — match-by-match scores                         |
+| `player_series_list(player_id, fmt, stat_type, filters)`  | numeric ID, `Format`, `StatType` | `SeriesList` — per-series averages                          |
+| `player_ground_stats(player_id, fmt, stat_type, filters)` | numeric ID, `Format`, `StatType` | `GroundAverages` — per-venue averages                       |
 
 `Format`: `"test"`, `"odi"`, `"t20i"`, `"fc"`, `"lista"`, `"t20"`
 `StatType`: `"batting"`, `"bowling"`, `"fielding"`, `"allround"`
@@ -193,17 +194,17 @@ All types are importable: `from cricdata import BallItem, MatchInfo, CareerStats
 
 ### Teams
 
-| Method | Parameters | Returns |
-|---|---|---|
-| `team(slug)` | team slug | `TeamPageData` — team info, recent results, squads |
-| `team_career_stats(team_id, fmt)` | numeric ID, `Format` | `CareerStats` — W/L/D record by opposition |
-| `team_match_list(team_id, fmt)` | numeric ID, `Format` | `MatchList` — match-by-match results |
-| `team_rankings(fmt)` | `RankingFormat` (`"test"`/`"odi"`/`"t20i"`) | `list[RankingGroup]` — ICC team rankings |
+| Method                            | Parameters                                  | Returns                                            |
+| --------------------------------- | ------------------------------------------- | -------------------------------------------------- |
+| `team(slug)`                      | team slug                                   | `TeamPageData` — team info, recent results, squads |
+| `team_career_stats(team_id, fmt)` | numeric ID, `Format`                        | `CareerStats` — W/L/D record by opposition         |
+| `team_match_list(team_id, fmt)`   | numeric ID, `Format`                        | `MatchList` — match-by-match results               |
+| `team_rankings(fmt)`              | `RankingFormat` (`"test"`/`"odi"`/`"t20i"`) | `list[RankingGroup]` — ICC team rankings           |
 
 ### Grounds
 
-| Method | Parameters | Returns |
-|---|---|---|
+| Method                         | Parameters           | Returns                                          |
+| ------------------------------ | -------------------- | ------------------------------------------------ |
 | `ground_stats(ground_id, fmt)` | numeric ID, `Format` | `CareerStats` — venue averages, W/L, RPO by team |
 
 ## Slugs and IDs

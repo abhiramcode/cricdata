@@ -7,6 +7,7 @@ from typing import Any, Literal, TypedDict, Union
 Format = Literal["test", "odi", "t20i", "fc", "lista", "t20"]
 RankingFormat = Literal["test", "odi", "t20i"]
 StatType = Literal["batting", "bowling", "fielding", "allround"]
+FixturesFilter = Literal["current", "future", "recent"]
 
 StatsRow = dict[str, str]
 
@@ -365,6 +366,10 @@ class TeamPageData(TypedDict):
 class StandingsData(TypedDict, total=False):
     data: dict[str, Any]
     isExternalSource: bool
+
+class CricketFixturesData(TypedDict):
+    title: str
+    seriesGroups: list[dict[str, Any]]
 
 
 # ------------------------------------------------------------------

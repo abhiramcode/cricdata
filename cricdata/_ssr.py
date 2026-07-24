@@ -4,12 +4,13 @@ from __future__ import annotations
 
 import json
 import re
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Literal
 
 from ._session import AsyncSession, Session
 from ._types import (
     CommentaryData,
     FallOfWicket,
+    FixturesFilter,
     MatchInfo,
     OverSummary,
     Partnership,
@@ -20,6 +21,7 @@ from ._types import (
     StandingsData,
     TeamPageData,
     WeatherResult,
+    CricketFixturesData,
 )
 
 _NEXT_DATA_RE = re.compile(
@@ -264,6 +266,14 @@ class SSR:
     # Series
     # ------------------------------------------------------------------
 
+    def cricket_fixtures(self, fixturefilter: FixturesFilter) -> CricketFixturesData:
+        data = self._page_data(f"/cricket-fixtures")
+        collections = data.get('collections', [{},{},{}])
+        for d1 in collections:
+            if fixturefilter in d1.get('title', '').lower():
+                return d1
+        return {'title' : '', 'seriesGroups': []}
+
     def series(self, slug: str) -> SeriesPageData:
         return self._page_data(f"/series/{slug}")
 
@@ -475,6 +485,14 @@ class AsyncSSR:
         }
 
     # Series
+
+    async def cricket_fixtures(self, fixturefilter: FixturesFilter) -> CricketFixturesData:
+        data = await self._page_data(f"/cricket-fixtures")
+        collections = data.get('collections', [{},{},{}])
+        for d1 in collections:
+            if fixturefilter in d1.get('title', '').lower():
+                return d1
+        return {'title' : '', 'seriesGroups': []}
 
     async def series(self, slug: str) -> SeriesPageData:
         return await self._page_data(f"/series/{slug}")

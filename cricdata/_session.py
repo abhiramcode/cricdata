@@ -27,7 +27,7 @@ class AsyncSession:
         return await self._session.get(url, **kwargs)
 
     async def aclose(self) -> None:
-        self._session.close()
+        await self._session.close()
 
     async def __aenter__(self) -> AsyncSession:
         return self
