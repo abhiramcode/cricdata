@@ -312,6 +312,7 @@ class MatchInfo(TypedDict):
     toss: Toss
     venue: dict[str, Any]
     captains: list[Captain]
+    playing: list[dict[str, Any]]
     weather: Any
     player_awards: list[dict[str, Any]]
     over_groups: list[list[dict[str, Any]]]

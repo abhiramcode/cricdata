@@ -146,7 +146,7 @@ class SSR:
         return result
 
     def match_info(self, series_slug: str, match_slug: str) -> MatchInfo:
-        """Match-level metadata: toss, venue, captains, weather, awards, phase stats."""
+        """Match-level metadata: toss, venue, captains, playing, weather, awards, phase stats."""
         data = self._scorecard_data(series_slug, match_slug)
         match = data.get("match", {})
         content = data.get("content", {})
@@ -195,6 +195,7 @@ class SSR:
             },
             "venue": match.get("ground", {}),
             "captains": captains,
+            "playing": content.get("matchPlayers", {}).get("teamPlayers", []),
             "weather": support.get("weather"),
             "player_awards": content.get("matchPlayerAwards", []),
             "over_groups": [
@@ -424,6 +425,7 @@ class AsyncSSR:
             },
             "venue": match.get("ground", {}),
             "captains": captains,
+            "playing": content.get("matchPlayers", {}).get("teamPlayers", []),
             "weather": support.get("weather"),
             "player_awards": content.get("matchPlayerAwards", []),
             "over_groups": [

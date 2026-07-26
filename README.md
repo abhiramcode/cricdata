@@ -79,6 +79,7 @@ print(info["time"])        # {"startTime": "...", "hoursInfo": "...", ...}
 print(info["toss"])        # {"winner_team": "...", "decision": "field"}
 print(info["venue"])       # {"name": "Eden Gardens, Kolkata", ...}
 print(info["captains"])    # [{"player_id": 51096, "name": "Ajinkya Rahane", "team_name": "KKR", ...}, ...]
+print(info["playing"])     # [ {...}, {...} ]
 print(info["over_groups"]) # powerplay / middle / death phase aggregates
 
 overs = ci.match_overs(series_slug, match_slug)  # over-by-over progression
@@ -161,7 +162,7 @@ All types are importable: `from cricdata import BallItem, MatchInfo, CareerStats
 | `match_overs(series_slug, match_slug)`           | series & match slugs | `list[list[OverSummary]]` — over-by-over progression per innings                     |
 | `match_partnerships(series_slug, match_slug)`    | series & match slugs | `list[list[Partnership]]` — partnership details per innings                          |
 | `match_fall_of_wickets(series_slug, match_slug)` | series & match slugs | `list[list[FallOfWicket]]` — FOW per innings                                         |
-| `match_info(series_slug, match_slug)`            | series & match slugs | `MatchInfo` — toss, venue, captains, time, weather, awards, phase stats              |
+| `match_info(series_slug, match_slug)`            | series & match slugs | `MatchInfo` — toss, venue, captains, playing, time, weather, awards, phase stats     |
 | `match_weather(series_slug, match_slug)`         | series & match slugs | `WeatherResult \| None` — weather (live via ESPNCricinfo, historical via Open-Meteo) |
 
 ### Series
